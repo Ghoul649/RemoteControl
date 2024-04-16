@@ -1,24 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import Button from '@mui/material/Button';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [count, setCount] = useState(0);
+  function handleClick(){
+    setCount(count => count + 1);
+  }
+  return (<Button variant="contained" onClick={handleClick}>Test{count > 0 ? ` (${count})` : ''}</Button>);
 }
 
 export default App;
