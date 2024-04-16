@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import './App.css';
-import Button from '@mui/material/Button';
+import { ConnectionModeSelector } from './components/ConnectionModeSelector';
+import { ConnectionMode } from './types/connectionMode';
 
 function App() {
-  const [count, setCount] = useState(0);
-  function handleClick(){
-    setCount(count => count + 1);
+
+  const [connectionMode, setConnectionMode] = useState<ConnectionMode | undefined>();
+  if (!connectionMode){
+    return (<ConnectionModeSelector onModeSelected={setConnectionMode}></ConnectionModeSelector>);
   }
-  return (<Button variant="contained" onClick={handleClick}>Test{count > 0 ? ` (${count})` : ''}</Button>);
+  return (
+    <div></div>
+  );
 }
 
 export default App;
