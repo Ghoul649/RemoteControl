@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@mixin theme($theme) {
+  @include mat.all-component-themes($theme);
+
+  @debug map-get($map: $theme, $key: foreground);
+
+  body {
+    background-color: mat.get-theme-color($theme, background, background);
+    color: mat.get-theme-color($theme, foreground, text);
+  }
+}

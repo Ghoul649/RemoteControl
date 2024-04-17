@@ -1,0 +1,19 @@
+<p class="mat-headline-4">Select connection mode</p>
+
+<div class="options-list">
+  <mat-card *ngFor="let option of options"
+            matRipple
+            [matRippleDisabled]="!option.enabled"
+            [class.disabled]="!option.enabled"
+            (click)="onCardClicked(option)"
+            (keydown.enter)="onCardClicked(option)"
+            [tabindex]="option.enabled ? 0 : -1">
+    <img matCardImage src="data:image/png;base64,">
+    <mat-card-header>
+      <mat-card-title>{{option.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{option.description}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
