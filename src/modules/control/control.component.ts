@@ -10,10 +10,27 @@ export class ControlComponent {
 
   }
 
+
+
   async connect(){
+
+
     const port = await navigator.serial.requestPort();
+
     await port.open({
-      baudRate: 9600
+      baudRate: 9600,
     });
+  }
+
+  async connectBluetooth(){
+    const filters = Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+      .map<BluetoothLEScanFilter>(c => ({namePrefix: c}))
+      .concat({name: ''});
+
+    const device = await navigator.bluetooth.requestDevice({
+      filters: filters,
+      optionalServices: ['generic_access']
+    });
+
   }
 }
