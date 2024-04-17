@@ -1,26 +1,27 @@
 import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
-import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from "@angular/router";
-import { ConnectionSelectorComponent } from "./components/connection-selector/connection-selector.component";
-import { MatCommonModule, MatRippleModule } from '@angular/material/core';
-import { MatCardModule } from '@angular/material/card';
+import { routes } from "./app.routes";
+import { SharedModule } from "modules/shared/shared.module";
+import { BrowserModule } from "@angular/platform-browser";
+
 
 @NgModule({
   imports: [
     BrowserModule,
+    SharedModule,
     BrowserAnimationsModule,
-    RouterModule,
-    MatCommonModule,
-    MatCardModule,
-    MatRippleModule
+    RouterModule.forRoot(routes, {
+      useHash: true
+    })
   ],
   declarations: [
-    AppComponent,
-    ConnectionSelectorComponent
+    AppComponent
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [
     AppComponent
   ]

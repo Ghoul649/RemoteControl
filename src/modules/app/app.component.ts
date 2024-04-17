@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { ConnectionMode } from "types/connection-mode";
 
 @Component({
   selector: 'app-root',
@@ -7,7 +6,5 @@ import { ConnectionMode } from "types/connection-mode";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  public connectionType?: ConnectionMode;
-
 
 }

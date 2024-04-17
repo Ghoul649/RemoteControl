@@ -20,10 +20,11 @@
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
-      "dom"
+      "dom",
     ],
     "paths": {
-      "types/*": ["./src/types/*"]
+      "types/*": ["./src/types/*"],
+      "modules/*": ["./src/modules/*"]
     }
   },
   "angularCompilerOptions": {
