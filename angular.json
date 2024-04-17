@@ -15,11 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
-            "outputPath": "build",
+            "outputPath": "docs",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -36,7 +36,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/RemoteControl/build/browser/",
+              "baseHref": "/RemoteControl/",
               "budgets": [
                 {
                   "type": "initial",
