@@ -1,0 +1,20 @@
+:host {
+  display: inline-block;
+  aspect-ratio: 1;
+  min-width: 100px;
+  position: relative;
+  background-color: #fff1;
+  border-radius: 10%;
+}
+
+.stick {
+  top: calc(50% * (1 + var(--y)));
+  left: calc(50% * (1 + var(--x)));
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  background-color: #555;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  transition: top 0.1s ease-out, left 0.1s ease-out;
+}

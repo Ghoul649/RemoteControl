@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 
 export enum ConnectionStatus {
   Disconnected,
@@ -17,10 +17,23 @@ export class DataRecievedEvent<T> {
 }
 
 
-export interface Connection<T = number[]> {
-  get status(): ConnectionStatus;
-  readonly output$: Observable<DataRecievedEvent<T> | ConnectionStatusEvent>;
-  connect(): void;
-  disconnect(): void;
-  send(data: T): Promise<void>;
+export abstract class Connection<T = number[]> {
+  private _status: ConnectionStatus = ConnectionStatus.Disconnected;
+  public get status(): ConnectionStatus {
+    return this._status;
+  }
+  protected readonly _output$ = new Subject<DataRecievedEvent<T> | ConnectionStatusEvent>();
+  readonly output$ = this._output$.asObservable();
+  abstract connect(): void;
+  abstract disconnect(): void;
+  abstract send(data: T): Promise<void>;
+  protected _changeStatus(newStatus: ConnectionStatus){
+    if(this._status === newStatus){
+      return;
+    }
+    this._output$.next(new ConnectionStatusEvent(
+      this._status,
+      this._status = newStatus
+    ));
+  }
 }

@@ -1,2 +1,6 @@
 <button (click)="connect()">Connect</button>
 <button (click)="connectBluetooth()">Connect (bluetooth)</button>
+<app-stick>
+  <axis vertical [(ngModel)]="control.controls.velocity.value"></axis>
+  <axis horizontal [(ngModel)]="control.controls.stearingWheels.value"></axis>
+</app-stick>

@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { SerialConnection } from "../../services/serial-connection";
+import { ControllerService } from "./services/controller-service";
+import { FakeConnection } from "../../services/fake-connection";
 
 @Component({
   selector: 'app-c-control',
@@ -7,11 +9,15 @@ import { SerialConnection } from "../../services/serial-connection";
   styleUrl: './control.component.scss'
 })
 export class ControlComponent {
+  public readonly control = new ControllerService(() => new FakeConnection());
+
+
   constructor(){
 
   }
 
   async connect(){
+    await this.control.startConnection();
   }
 
   async connectBluetooth(){

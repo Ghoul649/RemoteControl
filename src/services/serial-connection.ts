@@ -1,24 +1,16 @@
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { Connection, ConnectionStatus, ConnectionStatusEvent, DataRecievedEvent } from "types/connection";
 
-export class SerialConnection implements Connection<number[]> {
-
-  private _status: ConnectionStatus = ConnectionStatus.Disconnected;
-  get status(): ConnectionStatus {
-    return this._status;
-  }
-
-  private readonly _output$ = new Subject<DataRecievedEvent<number[]> | ConnectionStatusEvent>();
-  readonly output$ = this._output$.asObservable();
-
+export class SerialConnection extends Connection<number[]> {
   private _port?: SerialPort;
   private _writer?: WritableStreamDefaultWriter<Uint8Array>;
+  private _isDisconnecting: boolean = false;
 
 
   constructor(
     public readonly baudRate: number = 9600
   ){
-
+    super();
   }
 
   async connect() {
@@ -35,16 +27,6 @@ export class SerialConnection implements Connection<number[]> {
     this._startReading();
   }
 
-  private _changeStatus(newStatus: ConnectionStatus){
-    if(this._status === newStatus){
-      return;
-    }
-    this._output$.next(new ConnectionStatusEvent(
-      this._status,
-      this._status = newStatus
-    ));
-  }
-
   private async _startReading() {
     if(!this._port){
       throw new Error("Port is not set");
@@ -55,7 +37,6 @@ export class SerialConnection implements Connection<number[]> {
     try {
       while(true){
         const result = await reader.read();
-        //this.data$.next(result.value);
         if(result.value){
           this._output$.next(new DataRecievedEvent([...result.value]));
         }
@@ -65,6 +46,9 @@ export class SerialConnection implements Connection<number[]> {
       }
     } finally {
       reader.releaseLock();
+      if(!this._isDisconnecting){
+        this.disconnect();
+      }
     }
   }
 
@@ -73,6 +57,7 @@ export class SerialConnection implements Connection<number[]> {
       return;
     }
     await this._port.close();
+    this._output$.complete();
     delete this._port;
   }
 
