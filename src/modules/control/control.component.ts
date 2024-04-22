@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { SerialConnection } from "../../services/serial-connection";
 
 @Component({
   selector: 'app-c-control',
@@ -10,16 +11,7 @@ export class ControlComponent {
 
   }
 
-
-
   async connect(){
-
-
-    const port = await navigator.serial.requestPort();
-
-    await port.open({
-      baudRate: 9600,
-    });
   }
 
   async connectBluetooth(){
