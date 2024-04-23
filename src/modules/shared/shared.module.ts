@@ -9,7 +9,8 @@ import { StickAxisDirective, StickComponent } from "./components/two-axis-stick/
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   declarations: [
     StickComponent,
@@ -21,6 +22,7 @@ import { StickAxisDirective, StickComponent } from "./components/two-axis-stick/
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+
 
 
     StickComponent,

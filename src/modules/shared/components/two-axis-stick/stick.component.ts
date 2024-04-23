@@ -195,7 +195,6 @@ export class StickComponent implements OnDestroy {
         return;
       }
       e.preventDefault();
-      navigator.vibrate(1);
       const width = this._ref.nativeElement.clientWidth;
       const height = this._ref.nativeElement.clientHeight;
 

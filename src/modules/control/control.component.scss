@@ -1,4 +1,15 @@
-app-stick {
-  width: 300px;
+:host{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
+.joystick-container {
+  flex: 1 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.content {
+  z-index: 100;
+}

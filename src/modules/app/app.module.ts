@@ -5,11 +5,13 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./app.routes";
 import { SharedModule } from "modules/shared/shared.module";
 import { BrowserModule } from "@angular/platform-browser";
+import { MatCommonModule } from "@angular/material/core";
 
 
 @NgModule({
   imports: [
     BrowserModule,
+    MatCommonModule,
     SharedModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, {

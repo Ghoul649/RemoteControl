@@ -1,7 +1,6 @@
-<button (click)="connect()">Connect</button>
-<button (click)="connectBluetooth()">Connect (bluetooth)</button>
-<input type="range" min="-1" max="1" step="0.01" [(ngModel)]="control.controls.stearingWheels.value">
-<app-stick>
-  <app-stick-axis vertical [(ngModel)]="control.controls.velocity.value" positive-key="w" negative-key="s"></app-stick-axis>
-  <app-stick-axis horizontal [(ngModel)]="control.controls.stearingWheels.value" positive-key="d" negative-key="a"></app-stick-axis>
-</app-stick>
+<mat-toolbar>
+  <button (click)="connect()">Connect</button>
+  <button (click)="connectBluetooth()">Connect (bluetooth)</button>
+  <input type="range" min="-1" max="1" step="0.01" [(ngModel)]="control.controls.stearingWheels.value">
+</mat-toolbar>
+<div class="joystick-container" #container></div>
