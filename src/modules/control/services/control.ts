@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, Subject, Subscription, debounce, interval, map, of, startWith, switchMap } from "rxjs";
+import { BehaviorSubject, Observable, Subject, Subscription, debounce, interval, map, of, startWith, switchMap, tap } from "rxjs";
 import { Byte, ByteString, toByte } from "types/byte";
 
 export type ControlOptions<I, M> = {
@@ -59,7 +59,8 @@ export class BaseControl<I, M> {
           };
 
           return promise;
-        })
+        }),
+        tap(val => lastEmitted = val)
       )
     }
 

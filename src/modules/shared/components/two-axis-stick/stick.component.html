@@ -1,5 +1,7 @@
 
 <div class="stick"
-     [style.--x]="_viewX"
-     [style.--y]="_viewY">
+     [style.--x]="viewX"
+     [style.--y]="-viewY"
+     (mousedown)="onStickMouseDown($event)"
+     (touchstart)="onTouchStart($event)">
 </div>

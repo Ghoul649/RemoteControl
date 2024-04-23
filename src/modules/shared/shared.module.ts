@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { AxisDirective, StickComponent } from "./components/two-axis-stick/stick.component";
+import { StickAxisDirective, StickComponent } from "./components/two-axis-stick/stick.component";
 
 @NgModule({
   imports: [
@@ -13,7 +13,7 @@ import { AxisDirective, StickComponent } from "./components/two-axis-stick/stick
   ],
   declarations: [
     StickComponent,
-    AxisDirective
+    StickAxisDirective
   ],
   providers: [],
   exports: [
@@ -24,7 +24,7 @@ import { AxisDirective, StickComponent } from "./components/two-axis-stick/stick
 
 
     StickComponent,
-    AxisDirective
+    StickAxisDirective
   ]
 })
 export class SharedModule {}
