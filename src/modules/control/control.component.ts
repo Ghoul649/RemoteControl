@@ -5,33 +5,51 @@ import { FakeConnection } from "../../services/fake-connection";
 import nipplejs from "nipplejs";
 import { Connection } from "types/connection";
 import { InputSettings } from "types/forms/input-settings";
+import { AUTO_STYLE, animate, state, style, transition, trigger } from "@angular/animations";
 
 
 const defaultSettings: Required<InputSettings> = {
-  joystickSize: 64
+  joystickSize: 128
 }
+
+const inputSettingsKey = "inputSettings";
 
 @Component({
   selector: 'app-c-control',
   templateUrl: './control.component.html',
-  styleUrl: './control.component.scss'
+  styleUrl: './control.component.scss',
+  animations: [
+    trigger("collapsed", [
+      state('false', style({
+        height: AUTO_STYLE,
+        paddingBlock: '8px'
+      })),
+      state('true', style({
+        height: '0px',
+        paddingBlock: '0px'
+      })),
+      transition("false <=> true", [
+        animate("250ms ease-out")
+      ])
+    ])
+  ]
 })
 export class ControlComponent implements OnInit, OnDestroy {
+  readonly connectionTypes = ['fake', 'serial', 'bluetooth'] as const;
   public readonly control = new ControllerService();
 
   @ViewChild('container', {static: true}) containerRef!: ElementRef<HTMLElement>;
 
-  readonly connectionTypes = ['fake', 'serial', 'bluetooth'] as const;
+  settings: Required<InputSettings>;
   connectionType?: typeof this.connectionTypes[number];
+  hideHeader: boolean = false;
+  disableAction: boolean = false;
+
 
   private _joystickManager?: nipplejs.JoystickManager;
 
-  disableAction: boolean = false;
-
-  settings: Required<InputSettings>;
-
   constructor(private _zone: NgZone){
-    const storedValue = localStorage.getItem("inputSettings");
+    const storedValue = localStorage.getItem(inputSettingsKey);
     const storedSettings = storedValue ? JSON.parse(storedValue) : {};
     this.settings = {
       ...defaultSettings,
@@ -136,6 +154,8 @@ export class ControlComponent implements OnInit, OnDestroy {
       ...defaultSettings,
       ...settings
     };
+
+    localStorage.setItem(inputSettingsKey, JSON.stringify(this.settings));
     this._setupJoystick();
   }
 }

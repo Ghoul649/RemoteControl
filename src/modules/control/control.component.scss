@@ -5,6 +5,7 @@ mat-drawer-container {
 mat-drawer-content {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .joystick-container {
@@ -22,6 +23,8 @@ mat-toolbar {
   align-items: stretch;
   padding-block: 8px;
   height: auto;
+  overflow: hidden;
+  box-sizing: content-box;
   button {
     height: auto;
   }
