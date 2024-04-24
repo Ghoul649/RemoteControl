@@ -1,6 +1,32 @@
-<mat-toolbar>
-  <button (click)="connect()">Connect</button>
-  <button (click)="connectBluetooth()">Connect (bluetooth)</button>
-  <input type="range" min="-1" max="1" step="0.01" [(ngModel)]="control.controls.stearingWheels.value">
-</mat-toolbar>
-<div class="joystick-container" #container></div>
+<mat-drawer-container hasBackdrop>
+  <mat-drawer-content>
+    <div class="joystick-container" #container></div>
+    <mat-toolbar>
+      <mat-form-field subscriptSizing="dynamic">
+        <mat-label>Connection type</mat-label>
+        <mat-select [(ngModel)]="connectionType">
+          <mat-option value="fake">Fake</mat-option>
+          <mat-option value="serial">Serial</mat-option>
+          <mat-option value="serial">Bluetooth</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button color="primary" mat-stroked-button
+              (click)="this.control.connection ? disconnect() : connect()"
+              [disabled]="!connectionType || disableAction">
+        {{this.control.connection ? 'Disconnect' : 'Connect'}}
+      </button>
+      <input type="range" min="-1" max="1" step="0.01" [(ngModel)]="control.controls.stearingWheels.value">
+      <input type="range" min="-1" max="1" step="0.01" [(ngModel)]="control.controls.velocity.value">
+    </mat-toolbar>
+    <div class="screen-content">
+      <div class="menu-items">
+        <button mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>sports_esports</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-drawer-content>
+  <mat-drawer position="end" #drawer>
+    <app-input-settings [value]="settings" (applied)="setInputSettings($event)"></app-input-settings>
+  </mat-drawer>
+</mat-drawer-container>

@@ -1,15 +1,42 @@
-:host{
-  display: flex;
-  flex-direction: column;
+mat-drawer-container {
   height: 100%;
 }
 
-.joystick-container {
-  flex: 1 1;
-  overflow: hidden;
-  position: relative;
+mat-drawer-content {
+  display: flex;
+  flex-direction: column;
 }
 
-.content {
-  z-index: 100;
+.joystick-container {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+mat-toolbar {
+  z-index: 1;
+  column-gap: 16px;
+  align-items: stretch;
+  padding-block: 8px;
+  height: auto;
+  button {
+    height: auto;
+  }
+}
+
+.screen-content {
+  pointer-events: none;
+  position: relative;
+  flex: 1 1;
+}
+
+.menu-items {
+  pointer-events: all;
+  position: absolute;
+  right:0;
+  display: flex;
+  column-gap: 8px;
 }

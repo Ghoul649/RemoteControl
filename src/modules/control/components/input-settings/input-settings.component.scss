@@ -1,0 +1,23 @@
+form {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  padding: 32px;
+  min-width: 300px;
+}
+
+.slider-input-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  mat-slider {
+    flex: 1 1;
+    min-width: 100%;
+  }
+}
+
+.spacer{
+  flex: 1 1;
+}
